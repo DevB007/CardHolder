@@ -1,13 +1,5 @@
 package com.example.deveshwar.cardholder;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.zip.GZIPInputStream;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -26,17 +18,19 @@ import android.widget.EditText;
 
 import com.googlecode.tesseract.android.TessBaseAPI;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 public class MainActivity extends Activity {
     public static final String PACKAGE_NAME = "com.example.deveshwar.cardholder";
-    public static final String DATA_PATH = Environment
-            .getExternalStorageDirectory().toString() + "/SimpleAndroidOCR/";
+    public static final String DATA_PATH = Environment.getExternalStorageDirectory().toString() + "/CardHolder/";
 
-    // You should have the trained data file in assets folder
-    // You can get them at:
-    // http://code.google.com/p/tesseract-ocr/downloads/list
     public static final String lang = "eng";
 
-    private static final String TAG = "SimpleAndroidOCR.java";
+    private static final String TAG = "CardHolder.java";
 
     protected Button _button;
     // protected ImageView _image;
@@ -66,10 +60,6 @@ public class MainActivity extends Activity {
 
         }
 
-        // lang.traineddata file with the app (in assets folder)
-        // You can get them at:
-        // http://code.google.com/p/tesseract-ocr/downloads/list
-        // This area needs work and optimization
         if (!(new File(DATA_PATH + "tessdata/" + lang + ".traineddata")).exists()) {
             try {
 
@@ -110,8 +100,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    // Simple android photo capture:
-    // http://labs.makemachine.net/2010/03/simple-android-photo-capture/
 
     protected void startCameraActivity() {
         File file = new File(_path);
@@ -214,10 +202,6 @@ public class MainActivity extends Activity {
 
         baseApi.end();
 
-        // You now have the text in recognizedText var, you can do anything with it.
-        // We will display a stripped out trimmed alpha-numeric version of it (if lang is eng)
-        // so that garbage doesn't make it to the display.
-
         Log.v(TAG, "OCRED TEXT: " + recognizedText);
 
         if ( lang.equalsIgnoreCase("eng") ) {
@@ -231,7 +215,6 @@ public class MainActivity extends Activity {
             _field.setSelection(_field.getText().toString().length());
         }
 
-        // Cycle done.
     }
 
 }
